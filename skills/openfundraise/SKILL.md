@@ -44,4 +44,4 @@ Donor names, emails, phone numbers and addresses are private to the organization
 
 ## When a tool is missing
 
-If no tool can do what the user asked, such as refunds, exports or sending messages, say so plainly and call `get_more_tools` with a short description of what was needed. That records the request for the OpenFundraise team.
+If no tool can do what the user asked, such as refunds, exports or sending messages, say so plainly and call `report_missing_capability` with a short description of what was needed. That records the request for the OpenFundraise team.
