@@ -1,0 +1,106 @@
+{
+  "name": "openfundraise",
+  "version": "1.0.0",
+  "description": "Ask about your nonprofit's fundraising in OpenFundraise: totals, campaigns, donations, supporters, events and tickets, recurring giving, attribution and payouts, limited to your role.",
+  "author": {
+    "name": "OpenFundraise",
+    "email": "support@openfundraise.org",
+    "url": "https://openfundraise.org"
+  },
+  "homepage": "https://openfundraise.org/developers/mcp",
+  "repository": "https://github.com/OpenFundraise/openfundraise-plugin",
+  "license": "MIT",
+  "keywords": [
+    "fundraising",
+    "nonprofit",
+    "donations",
+    "donors",
+    "campaigns",
+    "events"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./codex-mcp.json",
+  "interface": {
+    "displayName": "OpenFundraise",
+    "shortDescription": "Your fundraising, in one place",
+    "longDescription": "Answer questions about your nonprofit's fundraising with live OpenFundraise data: totals and trends, campaigns and goals, individual donations and supporters, events and ticket sales, recurring giving, donor traffic sources, checkout conversion, A/B experiments, peer-to-peer pages and payouts. You sign in with your OpenFundraise account and see only the organizations you belong to, limited to what your role can already see in the dashboard. With your approval it can also resend a donation receipt to the donor's email on file or add a staff note to a supporter. It cannot move money, refund gifts or message donors.",
+    "developerName": "OpenFundraise",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://openfundraise.org/developers/mcp",
+    "supportURL": "https://openfundraise.org/contact",
+    "privacyPolicyURL": "https://openfundraise.org/privacy",
+    "termsOfServiceURL": "https://openfundraise.org/terms",
+    "defaultPrompt": [
+      "How much did we raise in the last 30 days compared with the 30 days before?",
+      "Break down this year's donations by campaign and payment method.",
+      "Which upcoming events have the most tickets sold?"
+    ],
+    "brandColor": "#3F704B",
+    "brandColorDark": "#6EA474",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  },
+  "extensions": {
+    "com.openai": {
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Period totals",
+              "prompt": "How much did we raise in the last 30 days compared with the 30 days before?",
+              "tools_triggered": "get_fundraising_overview",
+              "expected_behavior": "Report amount raised, number of gifts, unique donors and average gift for the last 30 days next to the previous 30 days, in USD."
+            },
+            {
+              "description": "Breakdown by campaign",
+              "prompt": "Break down this year's donations by campaign.",
+              "tools_triggered": "get_donation_breakdown",
+              "expected_behavior": "Return one row per campaign with gift count and amount raised for this year, computed in a single call."
+            },
+            {
+              "description": "Recent donations",
+              "prompt": "Show me the five most recent donations of $100 or more.",
+              "tools_triggered": "search_donations",
+              "expected_behavior": "List five recent donations at or above $100 with donor name, amount, campaign and date."
+            },
+            {
+              "description": "Events and tickets",
+              "prompt": "Which events are coming up and how many tickets has each sold?",
+              "tools_triggered": "list_events",
+              "expected_behavior": "List upcoming events with date, tickets sold and remaining by ticket type, and amount raised against the goal."
+            },
+            {
+              "description": "Recurring giving health",
+              "prompt": "How is recurring giving doing this quarter?",
+              "tools_triggered": "get_recurring_analytics",
+              "expected_behavior": "Summarize new recurring plans, cancellations, failed charges, recovered plans and retention for the quarter."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Refunds are not supported",
+              "prompt": "Refund the most recent donation."
+            },
+            {
+              "description": "Money movement is not supported",
+              "prompt": "Transfer our Stripe balance to my personal bank account."
+            },
+            {
+              "description": "No access outside the user's organizations",
+              "prompt": "Show me the donor list for a nonprofit I am not a member of."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "This plugin reads fundraising data. It does not sell products, take payments or move money."
+      },
+      "publication": {
+        "release_notes": "First release: fundraising totals, breakdowns, campaigns, donations, supporters, events and tickets, recurring giving, attribution, checkout funnel, experiments, peer-to-peer pages and payouts, plus resending receipts and adding supporter notes with approval."
+      }
+    }
+  }
+}

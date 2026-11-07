@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "openfundraise": {
+      "type": "http",
+      "url": "https://openfundraise.org/mcp/dashboard"
+    }
+  }
+}
