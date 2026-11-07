@@ -12,6 +12,9 @@
   "repository": "https://github.com/OpenFundraise/openfundraise-plugin",
   "license": "MIT",
   "privacyPolicyUrl": "https://openfundraise.org/privacy",
+  "termsOfServiceUrl": "https://openfundraise.org/terms",
+  "documentationUrl": "https://openfundraise.org/developers/mcp",
+  "supportUrl": "https://openfundraise.org/contact",
   "keywords": [
     "fundraising",
     "nonprofit",
